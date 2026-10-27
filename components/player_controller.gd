@@ -28,6 +28,7 @@ var mouse_sensitivity := 0.003
 var pitch_limit_deg   := 90.0
 var _input: InputComponent
 var _velocity: VelocityComponent
+var _holder: HolderComponent
 
 
 func _accepts(h: Node) -> bool:
@@ -38,6 +39,7 @@ func _accepts(h: Node) -> bool:
 func _component_ready()-> void:
 	_input    = manager.get_component(InputComponent) as InputComponent
 	_velocity = manager.get_component(VelocityComponent) as VelocityComponent
+	_holder = manager.get_component(HolderComponent) as HolderComponent
 	if _zoom_enabled and camera:
 		_zoom_target = clampf(camera.position.z, min_zoom, max_zoom)
 		if _zoom_target < min_third_person_zoom: _zoom_target = min_zoom
@@ -70,6 +72,12 @@ func _physics_process(delta: float) -> void:
 	_velocity.wants_jump = _input.is_jump_held()
 
 	_velocity.tick(delta)
+
+	if _holder:
+		var just := _input.is_lmb_just_pressed()
+		var held := _input.is_lmb_held()
+		if just or held:
+			_holder.use(&"lmb", just, held)
 
 
 func _update_zoom(delta: float) -> void:

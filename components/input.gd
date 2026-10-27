@@ -61,8 +61,17 @@ func consume_look() -> Vector2:
 	_look_delta = Vector2.ZERO
 	return d
 
+
 ## Returns accumulated scroll and resets it.
 func consume_scroll() -> float:
 	var d := _scroll_delta
 	_scroll_delta = 0.0
 	return d
+
+
+func is_lmb_held() -> bool:
+	return is_mouse_captured() and Input.is_action_pressed("lmb")
+
+
+func is_lmb_just_pressed() -> bool:
+	return is_mouse_captured() and Input.is_action_just_pressed("lmb")

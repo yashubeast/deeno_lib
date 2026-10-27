@@ -12,7 +12,7 @@ class_name VelocityComponent
 @export var terminal_velocity := 80.0
 @export var ground_friction   := 12.0
 @export var air_accel         := 8.0
-@export var air_drag          := 2.0
+@export var air_drag          := 1.0
 @export var gravity           := 28.0
 # Intent (set by a controller before tick() call
 ## 2D direction, length 0..1.
