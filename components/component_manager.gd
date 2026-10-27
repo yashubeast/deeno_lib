@@ -50,5 +50,5 @@ func has_components(types: Array[Script]) -> bool:
 
 ## Get ComponentManager of a node or null.
 static func of(node: Node) -> ComponentManager:
-	if node == null: return null
+	if node == null or not node.has_meta("component_manager"): return null
 	return node.get_meta("component_manager", null) as ComponentManager
